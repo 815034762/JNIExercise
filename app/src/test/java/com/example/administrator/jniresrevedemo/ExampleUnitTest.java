@@ -1,4 +1,4 @@
-package com.example.administrator.reverse;
+package com.example.administrator.jniresrevedemo;
 
 import org.junit.Test;
 

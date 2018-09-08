@@ -1,4 +1,4 @@
-package com.example.administrator.reverse;
+package com.example.administrator.jniresrevedemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.administrator.reverse", appContext.getPackageName());
+        assertEquals("com.example.administrator.jniresrevedemo", appContext.getPackageName());
     }
 }
