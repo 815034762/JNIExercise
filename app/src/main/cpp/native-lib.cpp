@@ -40,7 +40,7 @@ Java_com_example_administrator_jniresrevedemo_MainActivity_stringFromJNI(JNIEnv 
 extern "C"
 
 JNIEXPORT jobject JNICALL
-Java_com_example_administrator_jniresrevedemo_MainActivity_getObjFrom(JNIEnv *env,
+Java_com_example_administrator_jniresrevedemo_MainActivity_getObjFromc(JNIEnv *env,
                                                                       jobject instance) {
 
     jclass clazzPerson = env->FindClass("com/bean/Person");

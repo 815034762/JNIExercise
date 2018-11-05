@@ -5,19 +5,36 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+#设置生成的so动态库最后输出的路径
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
-             native-lib
+# 查找所有源码 并拼接到路径列表
+#aux_source_directory(${CMAKE_HOME_DIRECTORY}/src/main/cpp SRC_LIST)
+#aux_source_directory(${CMAKE_HOME_DIRECTORY}/src/main/cpp CORE_SRC_LIST)
+#list(APPEND SRC_LIST ${CORE_SRC_LIST})
 
-             # Sets the library as a shared library.
-             SHARED
+set(SRC_LISTS ${CMAKE_HOME_DIRECTORY}/src/main/cpp)
 
-             # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp )
+file(GLOB_RECURSE SRC_LIST ${SRC_LISTS}/*.cpp)
+
+add_library(native-lib SHARED ${SRC_LIST})
+
+#该指令的主要作用就是将指定的源文件生成链接文件，然后添加到工程中去。
+#add_library( # Sets the name of the library.
+#             native-lib
+#
+# Sets the library as a shared library.
+#             SHARED
+# Provides a relative path to your source file(s).
+#             src/main/cpp/native-lib.cpp
+#             src/main/cpp/second.cpp
+#             )
+
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

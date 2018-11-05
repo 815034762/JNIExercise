@@ -11,9 +11,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
-                cppFlags "-frtti -fexceptions"
+                 cppFlags "-frtti -fexceptions"
+                //生成.so库的目标平台
+                 abiFilters "armeabi-v7a","x86"
             }
         }
+
     }
     buildTypes {
         release {
@@ -21,11 +24,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // 设置so文件路径
+    sourceSets {
+        main {
+            // let gradle pack the shared library into apk
+            //jniLibs.srcDirs = ['../distribution/plus/lib']
+            //jniLibs.srcDirs =[]
+//            jniLibs.srcDirs = ['../distribution/plus/lib']
+        }
+    }
+
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
         }
     }
+
     buildToolsVersion '26.0.2'
 
     compileOptions {

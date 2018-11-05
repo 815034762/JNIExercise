@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        Person person = getObjFrom();
+        Person person = getObjFromc();
         System.out.print(person.getName() + "  " + person.getAge());
 
-        tv.setText(stringFromJNI() + "  " + person.getName() + "  " + person.getAge());
+        tv.setText(stringFromJNI() + "  " + person.getName() + "  " + person.getAge() + getStringFromOtherFile());
         person = setObjProperty("TTT", 20);
 
         Log.e("tag", " " + person.getName() + " age is " + person.getAge());
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public native String stringFromJNI();
 
-    public native Person getObjFrom();
+    public native Person getObjFromc();
 
     public native Person setObjProperty(String name, int age);
 
@@ -116,4 +116,6 @@ public class MainActivity extends AppCompatActivity {
     public synchronized native ArrayList<Person> sortPeron(ArrayList<Person> list);
 
     public native Person[] sortPersonByAge(Person[] personArray);
+
+    public native String getStringFromOtherFile();
 }
