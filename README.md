@@ -1,0 +1,2 @@
+# JNIExercise
+JNI用法
