@@ -22,12 +22,34 @@ set(SRC_LISTS ${CMAKE_HOME_DIRECTORY}/src/main/cpp)
 
 file(GLOB_RECURSE SRC_LIST ${SRC_LISTS}/*.cpp)
 
-add_library(native-lib SHARED ${SRC_LIST})
+#将指定的源文件生成链接文件
+add_library(JniDemo SHARED ${SRC_LIST})
+
+#把第三库使用到的头文件包含进去
+ include_directories( src/main/cpp/include/jsoncpp
+                      src/main/cpp/include/curl
+                      src/main/cpp)
+
+#引用外部库文件用 IMPORTED关键字
+add_library(curl STATIC IMPORTED)
+#指定外部库文件的路径
+set_target_properties(curl
+  PROPERTIES IMPORTED_LOCATION
+  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libcurl.a)
+
+#言归正传，那么要添加第三方的xx.a链接库呢？
+#通常我们把第三方提供的h文件夹，放在cpp的include里面。
+#这是规范，不是必须。而xxx.a库放在src/main/jniLibs/armeabi目录下。
+#依赖第三方库
+add_library(jsoncpp STATIC IMPORTED)
+set_target_properties(jsoncpp
+  PROPERTIES IMPORTED_LOCATION
+  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libjsoncpp.a)
+
 
 #该指令的主要作用就是将指定的源文件生成链接文件，然后添加到工程中去。
 #add_library( # Sets the name of the library.
-#             native-lib
-#
+#            JniDemo
 # Sets the library as a shared library.
 #             SHARED
 # Provides a relative path to your source file(s).
@@ -53,9 +75,10 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
+#将库文件引入工程
 target_link_libraries( # Specifies the target library.
-                       native-lib
+                       JniDemo
 
-                       # Links the target library to the log library
-                       # included in the NDK.
+                       jsoncpp
+                       curl
                        ${log-lib} )

@@ -26,15 +26,3 @@ Java_com_example_administrator_jniresrevedemo_MainActivity_getStringFromOtherFil
     std::string hello = "This String is from second C++ file";
     return env->NewStringUTF(hello.c_str());
 }
-
-jint JNI_OnLoad(JavaVM* vm, void* reserved)
-{
-    LOGE("============JNI_Onload");
-    /* success -- return valid version number */
-    return JNI_VERSION_1_4;
-}
-//当动态库被卸载时这个函数被系统调用
-JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved)
-{
-    LOGE("============JNI_OnUnload");
-}
