@@ -21,8 +21,7 @@ Java_com_example_administrator_jniresrevedemo_MainActivity_JavaCallC(JNIEnv *env
 ```
 例如，我们要在native层返回一个字符串给JAVA端，因为C和JAVA是不能直接交互的,那么我们需要JNIEnv作为中间的桥梁，
 首先我们要知道，java和c或者c++之前是有一个类型转换的。他们之间的关系如下图所示:
-
-
+![image](https://github.com/815034762/JNIExercise/blob/master/img/typetransfer.png)
 
 2、java调用C
 'public native Person getObjFromc();'
